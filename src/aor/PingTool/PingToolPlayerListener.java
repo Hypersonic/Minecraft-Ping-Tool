@@ -36,7 +36,11 @@ public class PingToolPlayerListener extends PlayerListener {
 				replacedBlocks.add(targetBlock);//store the block
 				replacedBlocksMaterial.add(targetBlock.getType());
 				targetBlock.setType(Material.WOOL); // Turn it to wool!
-				scheduleAsyncDelayedTask(plugin,ResetBlock.class,8);
+				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+				    public void run() {
+				        replaceBlock();
+				    }
+				}, 20L);
 			}
 		}
 	}
