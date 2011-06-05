@@ -14,14 +14,11 @@ public class PingToolPlayerListener extends PlayerListener {
 		plugin = instance;
 	}
 
-	public void onPlayerMove(PlayerMoveEvent event){
+	public void onPlayerInteract(PlayerMoveEvent event){
 		
 		Player player = event.getPlayer();
-		Location playerLoc = player.getLocation();
-		
-		player.sendMessage("Your X Coordinates : " + playerLoc.getX());
-		player.sendMessage("Your Y Coordinates : " + playerLoc.getY());
-		player.sendMessage("Your Z Coordinates : " + playerLoc.getZ());
+
+	
 	}
 
 }
