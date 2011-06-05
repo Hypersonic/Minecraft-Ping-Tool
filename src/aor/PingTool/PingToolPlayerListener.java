@@ -21,9 +21,12 @@ public class PingToolPlayerListener extends PlayerListener {
 	}
 	public static void replaceBlock(){
 		//put the block back in world
-		replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
+		Block block=replacedBlocks.get(0);
 		replacedBlocks.remove(0);
 		replacedBlocksMaterial.remove(0);
+		if(!replacedBlocks.contains(block){
+			replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
+		}
 	}
 	public void onPlayerInteract(PlayerInteractEvent event){
 		Player player = event.getPlayer();
