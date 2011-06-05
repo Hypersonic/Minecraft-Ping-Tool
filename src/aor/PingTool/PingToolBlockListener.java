@@ -17,7 +17,7 @@ public class PingToolBlockListener extends BlockListener{
 	}
 	//You HAVE to have this!
 
-	public void onBlockPlace(BlockPlaceEvent event){
+	/*public void onBlockPlace(BlockPlaceEvent event){
 		
 		Player player = event.getPlayer();
 		Block block = event.getBlock();
@@ -25,5 +25,5 @@ public class PingToolBlockListener extends BlockListener{
 
 		player.sendMessage("You placed a block with ID : " + mat);//Display a message to the player telling them what type of block they placed.
 
-	}
+	}*/
 }

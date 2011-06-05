@@ -8,25 +8,22 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
-
+import org.bukkit.material.*;
+import java.util.*;
+import org.bukkit.scheduler.*;
 
 public class PingToolPlayerListener extends PlayerListener {	
 	public static PingTool plugin;
-	public ArrayList<Block> replacedBlocks=new ArrayList<Block>;
-	public ArrayList<Material> replacedBlocksMaterial=new ArrayList<Material>;
+	public static List<Block> replacedBlocks=new ArrayList<Block>();
+	public static List<Material> replacedBlocksMaterial=new ArrayList<Material>();
 	public PingToolPlayerListener(PingTool instance) {
 		plugin = instance;
 	}
-	public void initializeArrayList(){
-		replacedBlocks.trimtosize();
-	}
-	public void replaceBlock(){
+	public void static replaceBlock(){
 		//put the block back in world
 		replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
 		replacedBlocks.remove(0);
-		replacedBlocks.trimtosize();
 		replacedBlocksMaterial.remove(0);
-		replacedBlocksMaterial.trimtosize();
 	}
 	public void onPlayerInteract(PlayerInteractEvent event){
 		Player player = event.getPlayer();
@@ -37,8 +34,9 @@ public class PingToolPlayerListener extends PlayerListener {
 			if (targetBlock.getType() != Material.AIR) // No pinging midair!
 			{
 				replacedBlocks.add(targetBlock);//store the block
-				replacedBlocksMaterial.add(targetBlock.getMaterial);
+				replacedBlocksMaterial.add(targetBlock.getType());
 				targetBlock.setType(Material.WOOL); // Turn it to wool!
+				scheduleAsyncDelayedTask(PingTool,ResetBlock.class,8);
 			}
 		}
 	}
