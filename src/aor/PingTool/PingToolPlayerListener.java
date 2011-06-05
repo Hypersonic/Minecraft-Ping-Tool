@@ -16,6 +16,7 @@ public class PingToolPlayerListener extends PlayerListener {
 	public static PingTool plugin;
 	public static List<Block> replacedBlocks=new ArrayList<Block>();
 	public static List<Material> replacedBlocksMaterial=new ArrayList<Material>();
+//	public Material redwool=
 	public PingToolPlayerListener(PingTool instance) {
 		plugin = instance;
 	}
@@ -24,7 +25,7 @@ public class PingToolPlayerListener extends PlayerListener {
 		Block block=replacedBlocks.get(0);
 		replacedBlocks.remove(0);
 		replacedBlocksMaterial.remove(0);
-		if(!replacedBlocks.contains(block){
+		if(!replacedBlocks.contains(block)){
 			replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
 		}
 	}
@@ -39,7 +40,7 @@ public class PingToolPlayerListener extends PlayerListener {
 				if(!replacedBlocks.contains(targetBlock)){
 					replacedBlocks.add(targetBlock);//store the block
 					replacedBlocksMaterial.add(targetBlock.getType());
-					targetBlock.setType(Material.WOOL.setData(14)); // Turn it to wool!
+					targetBlock.setType(Wool.setData((byte)14)); // Turn it to wool!
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						public void run() {
 							replaceBlock();
@@ -49,7 +50,7 @@ public class PingToolPlayerListener extends PlayerListener {
 				else{
 					replacedBlocks.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)));//store the block
 					replacedBlocksMaterial.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)).getType());
-					targetBlock.setType((Material.WOOL).setData(14)); // Turn it to wool!
+					targetBlock.setType(Wool.setData((byte)14)); // Turn it to wool!
 					
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						public void run() {
