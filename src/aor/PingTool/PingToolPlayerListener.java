@@ -31,16 +31,29 @@ public class PingToolPlayerListener extends PlayerListener {
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.WOOL) // If they left clicked with wool.
 		{
 			Block targetBlock = player.getTargetBlock(null, 1000); // Select the target block.
-			if (targetBlock.getType() != Material.AIR&&(!replacedBlocks.contains(targetBlock)) // No pinging midair!
+			if (targetBlock.getType() != Material.AIR) // No pinging midair!
 			{
-				replacedBlocks.add(targetBlock);//store the block
-				replacedBlocksMaterial.add(targetBlock.getType());
-				targetBlock.setType(Material.WOOL); // Turn it to wool!
-				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-				    public void run() {
-				        replaceBlock();
-				    }
-				}, 20L);
+				if(!replacedBlocks.contains(targetBlock)){
+					replacedBlocks.add(targetBlock);//store the block
+					replacedBlocksMaterial.add(targetBlock.getType());
+					targetBlock.setType(Material.WOOL.setData(14)); // Turn it to wool!
+					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+						public void run() {
+							replaceBlock();
+						}
+					}, 20L);
+				}
+				else{
+					replacedBlocks.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)));//store the block
+					replacedBlocksMaterial.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)).getType());
+					targetBlock.setType((Material.WOOL).setData(14)); // Turn it to wool!
+					
+					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+						public void run() {
+							replaceBlock();
+						}
+					}, 20L);
+				}
 			}
 		}
 	}
