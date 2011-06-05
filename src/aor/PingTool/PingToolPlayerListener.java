@@ -19,7 +19,7 @@ public class PingToolPlayerListener extends PlayerListener {
 	public PingToolPlayerListener(PingTool instance) {
 		plugin = instance;
 	}
-	public void static replaceBlock(){
+	public static void replaceBlock(){
 		//put the block back in world
 		replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
 		replacedBlocks.remove(0);
@@ -36,7 +36,7 @@ public class PingToolPlayerListener extends PlayerListener {
 				replacedBlocks.add(targetBlock);//store the block
 				replacedBlocksMaterial.add(targetBlock.getType());
 				targetBlock.setType(Material.WOOL); // Turn it to wool!
-				scheduleAsyncDelayedTask(PingTool,ResetBlock.class,8);
+				scheduleAsyncDelayedTask(plugin,ResetBlock.class,8);
 			}
 		}
 	}
