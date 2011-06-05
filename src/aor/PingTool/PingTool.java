@@ -31,7 +31,7 @@ public class PingTool extends JavaPlugin {
 	}
 
 	public void onEnable() {
-		
+		log.info("Ping Tool .5 is enabled!");
         PluginManager pm = this.getServer().getPluginManager();
         
         

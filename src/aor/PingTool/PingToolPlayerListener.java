@@ -31,7 +31,7 @@ public class PingToolPlayerListener extends PlayerListener {
 		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.WOOL) // If they left clicked with wool.
 		{
 			Block targetBlock = player.getTargetBlock(null, 1000); // Select the target block.
-			if (targetBlock.getType() != Material.AIR) // No pinging midair!
+			if (targetBlock.getType() != Material.AIR&&(!replacedBlocks.contains(targetBlock)) // No pinging midair!
 			{
 				replacedBlocks.add(targetBlock);//store the block
 				replacedBlocksMaterial.add(targetBlock.getType());
