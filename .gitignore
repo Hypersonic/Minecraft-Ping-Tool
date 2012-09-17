@@ -3,3 +3,6 @@ bin/*
 *.ctxt
 *.class
 +libs
+.classpath
+
+.project
