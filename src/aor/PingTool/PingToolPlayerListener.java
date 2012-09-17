@@ -4,15 +4,16 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.material.*;
 import java.util.*;
 import org.bukkit.scheduler.*;
 
-public class PingToolPlayerListener extends PlayerListener {	
+public class PingToolPlayerListener implements Listener {	
 	public static PingTool plugin;
 	public static List<Block> replacedBlocks=new ArrayList<Block>();
 	public static List<Material> replacedBlocksMaterial=new ArrayList<Material>();
@@ -29,6 +30,7 @@ public class PingToolPlayerListener extends PlayerListener {
 			replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
 		}
 	}
+	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event){
 		Player player = event.getPlayer();
 		// Left clicking air or a block event:

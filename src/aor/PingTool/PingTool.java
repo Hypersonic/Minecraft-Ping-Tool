@@ -19,8 +19,8 @@ public class PingTool extends JavaPlugin {
 
     //ClassListeners
         private final PingToolPlayerListener playerListener = new PingToolPlayerListener(this);
-	private final PingToolBlockListener blockListener = new PingToolBlockListener(this);
-	private final PingToolEntityListener entityListener = new PingToolEntityListener(this);
+	//private final PingToolBlockListener blockListener = new PingToolBlockListener(this);
+	//private final PingToolEntityListener entityListener = new PingToolEntityListener(this);
     //ClassListeners
 	
 	Logger log = Logger.getLogger("Minecraft");//Define your logger
@@ -35,7 +35,7 @@ public class PingTool extends JavaPlugin {
         PluginManager pm = this.getServer().getPluginManager();
         
         
-        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this);
+        pm.registerEvents(playerListener, this);
 
 /*Some other example listeners
 
