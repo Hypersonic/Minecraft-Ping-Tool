@@ -1,6 +1,8 @@
 package aor.PingTool;
 
-import org.bukkit.Location;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -8,10 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.material.*;
-import java.util.*;
-import org.bukkit.scheduler.*;
 
 public class PingToolPlayerListener implements Listener {	
 	public static PingTool plugin;
@@ -42,7 +40,7 @@ public class PingToolPlayerListener implements Listener {
 				if(!replacedBlocks.contains(targetBlock)){
 					replacedBlocks.add(targetBlock);//store the block
 					replacedBlocksMaterial.add(targetBlock.getType());
-					targetBlock.setType(Wool.setData((byte)14)); // Turn it to wool!
+					targetBlock.setType(Material.WOOL); // Turn it to wool!
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						public void run() {
 							replaceBlock();
@@ -52,7 +50,7 @@ public class PingToolPlayerListener implements Listener {
 				else{
 					replacedBlocks.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)));//store the block
 					replacedBlocksMaterial.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)).getType());
-					targetBlock.setType(Wool.setData((byte)14)); // Turn it to wool!
+					targetBlock.setType(Material.WOOL); // Turn it to wool!
 					
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						public void run() {
