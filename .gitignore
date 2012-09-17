@@ -1,5 +1,8 @@
-bin/*
+bin/
 *.bluej
 *.ctxt
 *.class
 +libs
+.classpath
+
+.project
