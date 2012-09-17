@@ -37,6 +37,7 @@ public class PingToolPlayerListener implements Listener {
 			Block targetBlock = player.getTargetBlock(null, 1000); // Select the target block.
 			if (targetBlock.getType() != Material.AIR) // No pinging midair!
 			{
+				event.setCancelled(true);
 				if(!replacedBlocks.contains(targetBlock)){
 					replacedBlocks.add(targetBlock);//store the block
 					replacedBlocksMaterial.add(targetBlock.getType());
