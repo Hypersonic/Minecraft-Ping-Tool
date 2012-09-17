@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class PingToolPlayerListener implements Listener {	
 	public static PingTool plugin;
 	public static List<Block> replacedBlocks=new ArrayList<Block>();
-	public static List<Material> replacedBlocksMaterial=new ArrayList<Material>();
+	public static List<BlockState> replacedBlocksState=new ArrayList<BlockState>();
 //	public Material redwool=
 	public PingToolPlayerListener(PingTool instance) {
 		plugin = instance;
@@ -22,10 +23,10 @@ public class PingToolPlayerListener implements Listener {
 	public static void replaceBlock(){
 		//put the block back in world
 		Block block=replacedBlocks.get(0);
+		BlockState blockState = replacedBlocksState.remove(0);
 		replacedBlocks.remove(0);
-		replacedBlocksMaterial.remove(0);
 		if(!replacedBlocks.contains(block)){
-			replacedBlocks.get(0).setType(replacedBlocksMaterial.get(0));
+			blockState.update(true); //forces existing block to become the block represented by blockState
 		}
 	}
 	@EventHandler
@@ -40,7 +41,7 @@ public class PingToolPlayerListener implements Listener {
 				event.setCancelled(true);
 				if(!replacedBlocks.contains(targetBlock)){
 					replacedBlocks.add(targetBlock);//store the block
-					replacedBlocksMaterial.add(targetBlock.getType());
+					replacedBlocksState.add(targetBlock.getState());
 					targetBlock.setType(Material.WOOL); // Turn it to wool!
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						public void run() {
@@ -50,7 +51,7 @@ public class PingToolPlayerListener implements Listener {
 				}
 				else{
 					replacedBlocks.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)));//store the block
-					replacedBlocksMaterial.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)).getType());
+					replacedBlocksState.add(replacedBlocksState.get(replacedBlocks.indexOf(targetBlock)));
 					targetBlock.setType(Material.WOOL); // Turn it to wool!
 					
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
