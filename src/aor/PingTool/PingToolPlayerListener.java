@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.material.MaterialData;
 
 public class PingToolPlayerListener implements Listener {	
 	public static PingTool plugin;
@@ -32,8 +33,9 @@ public class PingToolPlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event){
 		Player player = event.getPlayer();
+		MaterialData itemInHand = player.getItemInHand().getData();
 		// Left clicking air or a block event:
-		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && player.getItemInHand().getType() == Material.WOOL) // If they left clicked with wool.
+		if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) && itemInHand.getItemType() == Material.WOOL) // If they left clicked with wool.
 		{
 			Block targetBlock = player.getTargetBlock(null, 1000); // Select the target block.
 			if (targetBlock.getType() != Material.AIR) // No pinging midair!
@@ -48,7 +50,7 @@ public class PingToolPlayerListener implements Listener {
 					replacedBlocks.add(replacedBlocks.get(replacedBlockIndex));//store the block
 					replacedBlocksState.add(replacedBlocksState.get(replacedBlockIndex));
 				}
-				targetBlock.setType(Material.WOOL); // Turn it to wool!
+				targetBlock.setTypeIdAndData(itemInHand.getItemTypeId(), itemInHand.getData(), false); // Turn it to the wool player was holding!
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					public void run() {
 						replaceBlock();
