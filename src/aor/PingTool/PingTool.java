@@ -1,7 +1,5 @@
 package aor.PingTool; //Your package
 
-import java.util.logging.Logger;
-
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,38 +12,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PingTool extends JavaPlugin {
 
     //ClassListeners
-        private final PingToolPlayerListener playerListener = new PingToolPlayerListener(this);
-	//private final PingToolBlockListener blockListener = new PingToolBlockListener(this);
-	//private final PingToolEntityListener entityListener = new PingToolEntityListener(this);
+	private final PingToolPlayerListener playerListener = new PingToolPlayerListener(this);
     //ClassListeners
-	
-	Logger log = Logger.getLogger("Minecraft");//Define your logger
-
 
 	public void onDisable() {
-		log.info("Disabled message here, shown in console on startup");
+		getLogger().info("Disabled message here, shown in console on startup");
 	}
 
 	public void onEnable() {
-		log.info("Ping Tool .5 is enabled!");
+		getLogger().info("Ping Tool .5 is enabled!");
         PluginManager pm = this.getServer().getPluginManager();
-        
-        
         pm.registerEvents(playerListener, this);
-
-/*Some other example listeners
-
-        pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.CREATURE_SPAWN, spawnListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.ENTITY_EXPLODE, entityListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.BLOCK_BURN, blockListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.BLOCK_IGNITE, blockListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this);
-*/
-        
-        
-       
 	}
 	
 }

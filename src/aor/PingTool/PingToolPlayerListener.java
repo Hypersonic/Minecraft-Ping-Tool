@@ -16,19 +16,19 @@ public class PingToolPlayerListener implements Listener {
 	public static PingTool plugin;
 	public static List<Block> replacedBlocks=new ArrayList<Block>();
 	public static List<BlockState> replacedBlocksState=new ArrayList<BlockState>();
-//	public Material redwool=
+
 	public PingToolPlayerListener(PingTool instance) {
 		plugin = instance;
 	}
+
 	public static void replaceBlock(){
 		//put the block back in world
-		Block block=replacedBlocks.get(0);
 		BlockState blockState = replacedBlocksState.remove(0);
-		replacedBlocks.remove(0);
-		if(!replacedBlocks.contains(block)){
+		if(!replacedBlocks.contains(replacedBlocks.remove(0))){
 			blockState.update(true); //forces existing block to become the block represented by blockState
 		}
 	}
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event){
 		Player player = event.getPlayer();
@@ -42,24 +42,18 @@ public class PingToolPlayerListener implements Listener {
 				if(!replacedBlocks.contains(targetBlock)){
 					replacedBlocks.add(targetBlock);//store the block
 					replacedBlocksState.add(targetBlock.getState());
-					targetBlock.setType(Material.WOOL); // Turn it to wool!
-					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-						public void run() {
-							replaceBlock();
-						}
-					}, 20L);
 				}
 				else{
-					replacedBlocks.add(replacedBlocks.get(replacedBlocks.indexOf(targetBlock)));//store the block
-					replacedBlocksState.add(replacedBlocksState.get(replacedBlocks.indexOf(targetBlock)));
-					targetBlock.setType(Material.WOOL); // Turn it to wool!
-					
-					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-						public void run() {
-							replaceBlock();
-						}
-					}, 20L);
+					int replacedBlockIndex = replacedBlocks.indexOf(targetBlock);
+					replacedBlocks.add(replacedBlocks.get(replacedBlockIndex));//store the block
+					replacedBlocksState.add(replacedBlocksState.get(replacedBlockIndex));
 				}
+				targetBlock.setType(Material.WOOL); // Turn it to wool!
+				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+					public void run() {
+						replaceBlock();
+					}
+				}, 20L);
 			}
 		}
 	}
